@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>天气查询</title>
+    <link rel="icon" href="{{ url_for('static',filename='bootstrap/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='fontawesome/css/font-awesome.css') }}">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <form action="" method="post">
+                <div class="form-group">
+                    {{ form.city.label }}
+                    {{ form.city }}
+                    {% if form.city.errors -%}
+                        {% for error in form.city.errors -%}
+                            <small class="error" style="color: red">{{ error }}</small><br>
+                        {%- endfor %}
+                    {%- endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.submit }}
+                    {{ form.csrf_token }}
+                </div>
+            </form>
+            <div class="main" style="width: 360px;height:360px;">
+                <p>
+                    城市:{{ city_weather['city'] }}<br>
+                    日期:{{ city_weather['date'] }}<br>
+                    实时温度:{{ city_weather['now'] }}<br>
+                    温度:{{ city_weather['temperature'] }}<br>
+                    风向:{{ city_weather['fengxing'] }}<br>
+                    类型:{{ city_weather['type'] }}<br>
+                    贴士:{{ city_weather['tips'] }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
